@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Api;
@@ -20,7 +22,7 @@ use Dhl\Sdk\EcomUs\Exception\ServiceException;
  * @author Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
  */
-interface ManifestationServiceInterface
+interface ManifestServiceInterface
 {
     /**
      * Create manifest(s) for all pending packages.

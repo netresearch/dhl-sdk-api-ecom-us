@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Api;
@@ -18,22 +20,8 @@ use Psr\Log\LoggerInterface;
  */
 interface ServiceFactoryInterface
 {
-    const SANDBOX_BASE_URL = 'https://api-sandbox.dhlecs.com/';
-    const PRODUCTION_BASE_URL = 'https://api.dhlecs.com/';
-
-    /**
-     * Create the authentication service.
-     *
-     * @param LoggerInterface $logger
-     * @param bool $sandboxMode
-     *
-     * @return AuthenticationServiceInterface
-     * @throws ServiceException
-     */
-    public function createAuthenticationService(
-        LoggerInterface $logger,
-        bool $sandboxMode = false
-    ): AuthenticationServiceInterface;
+    public const SANDBOX_BASE_URL = 'https://api-sandbox.dhlecs.com/';
+    public const PRODUCTION_BASE_URL = 'https://api.dhlecs.com/';
 
     /**
      * Create the label creation service.
@@ -58,12 +46,12 @@ interface ServiceFactoryInterface
      * @param LoggerInterface $logger
      * @param bool $sandboxMode
      *
-     * @return ManifestationServiceInterface
+     * @return ManifestServiceInterface
      * @throws ServiceException
      */
     public function createManifestationService(
         AuthenticationStorageInterface $authStorage,
         LoggerInterface $logger,
         bool $sandboxMode = false
-    ): ManifestationServiceInterface;
+    ): ManifestServiceInterface;
 }
