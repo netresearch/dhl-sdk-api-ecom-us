@@ -79,7 +79,7 @@ class CreateLabelResponseType
     }
 
     /**
-     * @return Label[]
+     * @return \Dhl\Sdk\EcomUs\Model\Label\ResponseType\Label[]
      */
     public function getLabels(): array
     {

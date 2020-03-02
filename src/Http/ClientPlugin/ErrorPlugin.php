@@ -60,7 +60,7 @@ final class ErrorPlugin implements Plugin
             $title = sprintf('[%s] %s. ', $statusCode, $reasonPhrase);
         }
 
-        if (!is_array($responseData['invalidParams'])) {
+        if (!isset($responseData['invalidParams']) || !is_array($responseData['invalidParams'])) {
             return $title;
         }
 
@@ -142,9 +142,11 @@ final class ErrorPlugin implements Plugin
         $fnFulfilled = function (ResponseInterface $response) use ($request) {
             $statusCode = $response->getStatusCode();
 
-            $this->isDetailedErrorResponse($response)
-                ? $this->handleDetailedError($statusCode, $request, $response)
-                : $this->handleError($statusCode, $request, $response);
+            if ($statusCode >= 400 && $statusCode < 600) {
+                $this->isDetailedErrorResponse($response)
+                    ? $this->handleDetailedError($statusCode, $request, $response)
+                    : $this->handleError($statusCode, $request, $response);
+            }
 
             // no error
             return $response;

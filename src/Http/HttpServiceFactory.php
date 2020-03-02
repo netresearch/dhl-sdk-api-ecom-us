@@ -21,7 +21,9 @@ use Dhl\Sdk\EcomUs\Serializer\JsonSerializer;
 use Dhl\Sdk\EcomUs\Service\AuthenticationService;
 use Dhl\Sdk\EcomUs\Service\LabelService;
 use Dhl\Sdk\EcomUs\Service\ManifestService;
+use Http\Client\Common\Plugin\ContentLengthPlugin;
 use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
+use Http\Client\Common\Plugin\HeaderSetPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
@@ -43,38 +45,49 @@ class HttpServiceFactory implements ServiceFactoryInterface
     private $httpClient;
 
     /**
-     * HttpServiceFactory constructor.
-     * @param HttpClient $httpClient
+     * @var string
      */
-    public function __construct(HttpClient $httpClient)
+    private $userAgent;
+
+    /**
+     * HttpServiceFactory constructor.
+     *
+     * @param HttpClient $httpClient
+     * @param string $userAgent
+     */
+    public function __construct(HttpClient $httpClient, string $userAgent = '')
     {
         $this->httpClient = $httpClient;
+        $this->userAgent = $userAgent;
     }
 
     private function createAuthenticationService(
         LoggerInterface $logger,
         bool $sandboxMode = false
     ): AuthenticationService {
-        $serializer = new JsonSerializer();
-
-        $plugins = [
-            new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
-            new ErrorPlugin(),
+        $headers = [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'User-Agent' => $this->userAgent,
         ];
-        $client = new PluginClient($this->httpClient, $plugins);
 
-        $baseUrl = $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL;
-        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
-        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
-        $responseMapper = new AuthenticationResponseMapper();
+        $client = new PluginClient(
+            $this->httpClient,
+            [
+                new HeaderSetPlugin(array_filter($headers)),
+                new ContentLengthPlugin(),
+                new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
+                new ErrorPlugin(),
+            ]
+        );
 
         return new AuthenticationService(
             $client,
-            $baseUrl,
-            $serializer,
-            $requestFactory,
-            $streamFactory,
-            $responseMapper
+            $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL,
+            new JsonSerializer(),
+            Psr17FactoryDiscovery::findRequestFactory(),
+            Psr17FactoryDiscovery::findStreamFactory(),
+            new AuthenticationResponseMapper()
         );
     }
 
@@ -83,31 +96,32 @@ class HttpServiceFactory implements ServiceFactoryInterface
         LoggerInterface $logger,
         bool $sandboxMode = false
     ): LabelServiceInterface {
-        $serializer = new JsonSerializer();
         $authService = $this->createAuthenticationService($logger, $sandboxMode);
 
-        // todo(nr): set user agent header
-        $plugins = [
-            new HeaderDefaultsPlugin(['Accept' => 'application/json', 'Content-Type' => 'application/json']),
-            new AuthenticationPlugin($authService, $authStorage),
-            new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
-            new ErrorPlugin(),
+        $headers = [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'User-Agent' => $this->userAgent,
         ];
-        $client = new PluginClient($this->httpClient, $plugins);
 
-        $baseUrl = $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL;
-        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
-        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
-
-        $responseMapper = new LabelResponseMapper();
+        $client = new PluginClient(
+            $this->httpClient,
+            [
+                new HeaderDefaultsPlugin(array_filter($headers)),
+                new ContentLengthPlugin(),
+                new AuthenticationPlugin($authService, $authStorage),
+                new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
+                new ErrorPlugin(),
+            ]
+        );
 
         return new LabelService(
             $client,
-            $baseUrl,
-            $serializer,
-            $requestFactory,
-            $streamFactory,
-            $responseMapper
+            $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL,
+            new JsonSerializer(),
+            Psr17FactoryDiscovery::findRequestFactory(),
+            Psr17FactoryDiscovery::findStreamFactory(),
+            new LabelResponseMapper()
         );
     }
 
@@ -116,31 +130,32 @@ class HttpServiceFactory implements ServiceFactoryInterface
         LoggerInterface $logger,
         bool $sandboxMode = false
     ): ManifestServiceInterface {
-        $serializer = new JsonSerializer();
         $authService = $this->createAuthenticationService($logger, $sandboxMode);
 
-        // todo(nr): set user agent header
-        $plugins = [
-            new HeaderDefaultsPlugin(['Accept' => 'application/json', 'Content-Type' => 'application/json']),
-            new AuthenticationPlugin($authService, $authStorage),
-            new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
-            new ErrorPlugin(),
+        $headers = [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'User-Agent' => $this->userAgent,
         ];
-        $client = new PluginClient($this->httpClient, $plugins);
 
-        $baseUrl = $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL;
-        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
-        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
-
-        $responseMapper = new ManifestResponseMapper();
+        $client = new PluginClient(
+            $this->httpClient,
+            [
+                new HeaderSetPlugin(array_filter($headers)),
+                new ContentLengthPlugin(),
+                new AuthenticationPlugin($authService, $authStorage),
+                new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
+                new ErrorPlugin(),
+            ]
+        );
 
         return new ManifestService(
             $client,
-            $baseUrl,
-            $serializer,
-            $requestFactory,
-            $streamFactory,
-            $responseMapper
+            $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL,
+            new JsonSerializer(),
+            Psr17FactoryDiscovery::findRequestFactory(),
+            Psr17FactoryDiscovery::findStreamFactory(),
+            new ManifestResponseMapper()
         );
     }
 }

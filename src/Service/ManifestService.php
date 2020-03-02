@@ -107,6 +107,7 @@ class ManifestService implements ManifestServiceInterface
      */
     private function manifest(string $pickupAccountNumber, array $packageIds = []): array
     {
+        $uri = $this->baseUrl . self::RESOURCE;
         $manifestRequest = new CreateManifestRequestType($pickupAccountNumber, $packageIds);
 
         try {
@@ -114,8 +115,7 @@ class ManifestService implements ManifestServiceInterface
             $payload = $this->serializer->encode($manifestRequest);
             $stream = $this->streamFactory->createStream($payload);
 
-            $httpRequest = $this->requestFactory->createRequest('POST', $this->baseUrl . self::RESOURCE);
-            $httpRequest = $httpRequest->withBody($stream);
+            $httpRequest = $this->requestFactory->createRequest('POST', $uri)->withBody($stream);
 
             $response = $this->client->sendRequest($httpRequest);
             $responseJson = (string) $response->getBody();

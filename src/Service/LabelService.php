@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Service;
 
-use Dhl\Sdk\EcomUs\Api\Data\PackageInterface;
+use Dhl\Sdk\EcomUs\Api\Data\LabelInterface;
 use Dhl\Sdk\EcomUs\Api\LabelServiceInterface;
 use Dhl\Sdk\EcomUs\Exception\AuthenticationErrorException;
 use Dhl\Sdk\EcomUs\Exception\DetailedErrorException;
@@ -91,15 +91,14 @@ class LabelService implements LabelServiceInterface
     public function createLabel(
         \JsonSerializable $labelRequest,
         string $format = self::LABEL_FORMAT_PNG
-    ): PackageInterface {
+    ): LabelInterface {
         $uri = $this->baseUrl . self::RESOURCE . '?format=' . $format;
 
         try {
             $payload = $this->serializer->encode($labelRequest);
             $stream = $this->streamFactory->createStream($payload);
 
-            $httpRequest = $this->requestFactory->createRequest('POST', $uri);
-            $httpRequest = $httpRequest->withBody($stream);
+            $httpRequest = $this->requestFactory->createRequest('POST', $uri)->withBody($stream);
 
             $response = $this->client->sendRequest($httpRequest);
             $responseJson = (string) $response->getBody();

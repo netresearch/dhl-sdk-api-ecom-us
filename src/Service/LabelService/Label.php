@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Service\LabelService;
 
-use Dhl\Sdk\EcomUs\Api\Data\PackageInterface;
+use Dhl\Sdk\EcomUs\Api\Data\LabelInterface;
 
 /**
  * Label service response model.
@@ -16,7 +16,7 @@ use Dhl\Sdk\EcomUs\Api\Data\PackageInterface;
  * @author Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
  */
-class Package implements PackageInterface
+class Label implements LabelInterface
 {
     /**
      * @var string
@@ -39,30 +39,30 @@ class Package implements PackageInterface
     private $format;
 
     /**
-     * @var string[]
+     * @var string
      */
-    private $labels;
+    private $labelData;
 
     /**
-     * Package constructor.
+     * Label constructor.
      * @param string $packageId
      * @param string $dhlPackageId
      * @param string $trackingNumber
      * @param string $format
-     * @param string[] $labels
+     * @param string $labelData
      */
     public function __construct(
         string $packageId,
         string $dhlPackageId,
         string $trackingNumber,
         string $format,
-        array $labels
+        string $labelData
     ) {
         $this->packageId = $packageId;
         $this->dhlPackageId = $dhlPackageId;
         $this->trackingNumber = $trackingNumber;
         $this->format = $format;
-        $this->labels = $labels;
+        $this->labelData = $labelData;
     }
 
     /**
@@ -98,10 +98,10 @@ class Package implements PackageInterface
     }
 
     /**
-     * @return string[]
+     * @return string
      */
-    public function getLabels(): array
+    public function getLabelData(): string
     {
-        return $this->labels;
+        return $this->labelData;
     }
 }

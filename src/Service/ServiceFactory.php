@@ -26,6 +26,21 @@ use Psr\Log\LoggerInterface;
  */
 class ServiceFactory implements ServiceFactoryInterface
 {
+    /**
+     * @var string
+     */
+    private $userAgent;
+
+    /**
+     * ServiceFactory constructor.
+     *
+     * @param string $userAgent
+     */
+    public function __construct(string $userAgent = '')
+    {
+        $this->userAgent = $userAgent;
+    }
+
     public function createLabelService(
         AuthenticationStorageInterface $authStorage,
         LoggerInterface $logger,
@@ -37,7 +52,7 @@ class ServiceFactory implements ServiceFactoryInterface
             throw ServiceExceptionFactory::create($exception);
         }
 
-        $httpServiceFactory = new HttpServiceFactory($httpClient);
+        $httpServiceFactory = new HttpServiceFactory($httpClient, $this->userAgent);
         return $httpServiceFactory->createLabelService($authStorage, $logger, $sandboxMode);
     }
 
@@ -52,7 +67,7 @@ class ServiceFactory implements ServiceFactoryInterface
             throw ServiceExceptionFactory::create($exception);
         }
 
-        $httpServiceFactory = new HttpServiceFactory($httpClient);
+        $httpServiceFactory = new HttpServiceFactory($httpClient, $this->userAgent);
         return $httpServiceFactory->createManifestationService($authStorage, $logger, $sandboxMode);
     }
 }

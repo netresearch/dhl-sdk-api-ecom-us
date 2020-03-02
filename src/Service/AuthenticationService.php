@@ -99,9 +99,9 @@ class AuthenticationService
         try {
             $basicAuth = \sprintf('Basic %s', \base64_encode(\sprintf('%s:%s', $username, $password)));
 
-            $httpRequest = $this->requestFactory->createRequest('GET', $this->baseUrl . self::RESOURCE);
-            $httpRequest->withBody($this->streamFactory->createStream('grant_type=client_credentials'));
-            $httpRequest->withAddedHeader('Authorization', $basicAuth);
+            $httpRequest = $this->requestFactory->createRequest('POST', $this->baseUrl . self::RESOURCE)
+                ->withBody($this->streamFactory->createStream('grant_type=client_credentials'))
+                ->withAddedHeader('Authorization', $basicAuth);
 
             $response = $this->client->sendRequest($httpRequest);
             $responseJson = (string) $response->getBody();

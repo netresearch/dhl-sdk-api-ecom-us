@@ -37,6 +37,11 @@ class Label
     /**
      * @var string
      */
+    private $trackingId;
+
+    /**
+     * @var string
+     */
     private $labelData;
 
     /**
@@ -81,6 +86,14 @@ class Label
     public function getDhlPackageId(): string
     {
         return $this->dhlPackageId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrackingId(): string
+    {
+        return $this->trackingId;
     }
 
     /**

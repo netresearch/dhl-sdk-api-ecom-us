@@ -9,13 +9,13 @@ declare(strict_types=1);
 namespace Dhl\Sdk\EcomUs\Api\Data;
 
 /**
- * Interface PackageInterface
+ * Interface LabelInterface
  *
  * @api
  * @author Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
  */
-interface PackageInterface
+interface LabelInterface
 {
     /**
      * Returns the package id reference for which label was created (Customer Confirmation Number, CCN).
@@ -46,9 +46,9 @@ interface PackageInterface
     public function getFormat(): string;
 
     /**
-     * Returns the BASE64 encoded labels.
+     * Returns the label data.
      *
-     * @return string[]
+     * @return string
      */
-    public function getLabels(): array;
+    public function getLabelData(): string;
 }
