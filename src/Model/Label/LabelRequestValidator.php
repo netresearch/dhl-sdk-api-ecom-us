@@ -32,7 +32,7 @@ class LabelRequestValidator
      *
      * @throws RequestValidatorException
      */
-    public static function validate(array $data)
+    public static function validate(array $data): void
     {
         if (empty($data['shipmentDetails']['pickupAccount']) || empty($data['shipmentDetails']['distributionCenter'])) {
             throw new RequestValidatorException(self::MSG_ACCOUNT_DATA_REQUIRED);

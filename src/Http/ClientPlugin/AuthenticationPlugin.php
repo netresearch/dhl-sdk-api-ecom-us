@@ -114,7 +114,7 @@ final class AuthenticationPlugin implements Plugin
      *
      * @throws AuthenticationException
      */
-    private function renewToken()
+    private function renewToken(): void
     {
         // perform authentication with basic auth
         $authResponse = $this->authService->authenticate(
