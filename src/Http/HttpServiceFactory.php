@@ -12,6 +12,8 @@ use Dhl\Sdk\EcomUs\Api\AuthenticationStorageInterface;
 use Dhl\Sdk\EcomUs\Api\LabelServiceInterface;
 use Dhl\Sdk\EcomUs\Api\ManifestServiceInterface;
 use Dhl\Sdk\EcomUs\Api\ServiceFactoryInterface;
+use Dhl\Sdk\EcomUs\Exception\ServiceException;
+use Dhl\Sdk\EcomUs\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\EcomUs\Http\ClientPlugin\AuthenticationPlugin;
 use Dhl\Sdk\EcomUs\Http\ClientPlugin\ErrorPlugin;
 use Dhl\Sdk\EcomUs\Model\Auth\AuthenticationResponseMapper;
@@ -27,6 +29,7 @@ use Http\Client\Common\Plugin\HeaderSetPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Message\Formatter\FullHttpMessageFormatter;
 use Psr\Log\LoggerInterface;
@@ -61,6 +64,12 @@ class HttpServiceFactory implements ServiceFactoryInterface
         $this->userAgent = $userAgent;
     }
 
+    /**
+     * @param LoggerInterface $logger
+     * @param bool $sandboxMode
+     * @return AuthenticationService
+     * @throws ServiceException
+     */
     private function createAuthenticationService(
         LoggerInterface $logger,
         bool $sandboxMode = false
@@ -81,12 +90,19 @@ class HttpServiceFactory implements ServiceFactoryInterface
             ]
         );
 
+        try {
+            $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+            $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+        } catch (NotFoundException $exception) {
+            throw ServiceExceptionFactory::create($exception);
+        }
+
         return new AuthenticationService(
             $client,
             $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL,
             new JsonSerializer(),
-            Psr17FactoryDiscovery::findRequestFactory(),
-            Psr17FactoryDiscovery::findStreamFactory(),
+            $requestFactory,
+            $streamFactory,
             new AuthenticationResponseMapper()
         );
     }
@@ -108,19 +124,26 @@ class HttpServiceFactory implements ServiceFactoryInterface
             $this->httpClient,
             [
                 new HeaderDefaultsPlugin(array_filter($headers)),
-                new ContentLengthPlugin(),
                 new AuthenticationPlugin($authService, $authStorage),
+                new ContentLengthPlugin(),
                 new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
                 new ErrorPlugin(),
             ]
         );
 
+        try {
+            $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+            $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+        } catch (NotFoundException $exception) {
+            throw ServiceExceptionFactory::create($exception);
+        }
+
         return new LabelService(
             $client,
             $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL,
             new JsonSerializer(),
-            Psr17FactoryDiscovery::findRequestFactory(),
-            Psr17FactoryDiscovery::findStreamFactory(),
+            $requestFactory,
+            $streamFactory,
             new LabelResponseMapper()
         );
     }
@@ -149,12 +172,19 @@ class HttpServiceFactory implements ServiceFactoryInterface
             ]
         );
 
+        try {
+            $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
+            $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+        } catch (NotFoundException $exception) {
+            throw ServiceExceptionFactory::create($exception);
+        }
+
         return new ManifestService(
             $client,
             $sandboxMode ? self::SANDBOX_BASE_URL : self::PRODUCTION_BASE_URL,
             new JsonSerializer(),
-            Psr17FactoryDiscovery::findRequestFactory(),
-            Psr17FactoryDiscovery::findStreamFactory(),
+            $requestFactory,
+            $streamFactory,
             new ManifestResponseMapper()
         );
     }

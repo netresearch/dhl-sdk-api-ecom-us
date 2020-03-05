@@ -11,7 +11,7 @@ namespace Dhl\Sdk\EcomUs\Service;
 use Dhl\Sdk\EcomUs\Exception\AuthenticationException;
 use Dhl\Sdk\EcomUs\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\EcomUs\Model\Auth\AuthenticationResponseMapper;
-use Dhl\Sdk\EcomUs\Model\Auth\ResponseType\AuthenticationResponseType;
+use Dhl\Sdk\EcomUs\Model\Auth\AuthenticationResponseType;
 use Dhl\Sdk\EcomUs\Serializer\JsonSerializer;
 use Dhl\Sdk\EcomUs\Service\AuthenticationService\Token;
 use Http\Client\HttpClient;

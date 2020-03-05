@@ -6,7 +6,7 @@
 
 declare(strict_types=1);
 
-namespace Dhl\Sdk\EcomUs\Model\Auth\ResponseType;
+namespace Dhl\Sdk\EcomUs\Model\Auth;
 
 /**
  * Authentication response representation.

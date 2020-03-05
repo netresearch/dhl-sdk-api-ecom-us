@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Model\Auth;
 
-use Dhl\Sdk\EcomUs\Model\Auth\ResponseType\AuthenticationResponseType;
 use Dhl\Sdk\EcomUs\Service\AuthenticationService\Token;
 
 /**
