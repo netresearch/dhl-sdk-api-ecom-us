@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Http\ClientPlugin;
 
-use Dhl\Sdk\EcomUs\Exception\AuthenticationErrorException;
 use Dhl\Sdk\EcomUs\Exception\DetailedErrorException;
 use Http\Client\Common\Plugin;
 use Http\Client\Exception\HttpException;
@@ -24,11 +23,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 final class ErrorPlugin implements Plugin
 {
-    /**
-     * HTTP response codes
-     */
-    private const HTTP_UNAUTHORIZED = 401;
-
     /**
      * Returns TRUE if the response contains a parsable body.
      *
@@ -83,7 +77,6 @@ final class ErrorPlugin implements Plugin
      *
      * @return void
      *
-     * @throws AuthenticationErrorException
      * @throws DetailedErrorException
      */
     private function handleDetailedError(int $statusCode, RequestInterface $request, ResponseInterface $response)
@@ -91,10 +84,6 @@ final class ErrorPlugin implements Plugin
         $responseJson = (string) $response->getBody();
         $responseData = \json_decode($responseJson, true);
         $errorMessage = $this->formatErrorMessage($statusCode, $response->getReasonPhrase(), $responseData);
-
-        if ($statusCode === self::HTTP_UNAUTHORIZED) {
-            throw new AuthenticationErrorException($errorMessage, $request, $response);
-        }
 
         throw new DetailedErrorException($errorMessage, $request, $response);
     }
@@ -108,19 +97,10 @@ final class ErrorPlugin implements Plugin
      *
      * @return void
      *
-     * @throws AuthenticationErrorException
      * @throws HttpException
      */
     private function handleError(int $statusCode, RequestInterface $request, ResponseInterface $response)
     {
-        if ($statusCode === self::HTTP_UNAUTHORIZED) {
-            throw new AuthenticationErrorException(
-                'Authentication failed. Please check your access credentials.',
-                $request,
-                $response
-            );
-        }
-
         throw new HttpException($response->getReasonPhrase(), $request, $response);
     }
 

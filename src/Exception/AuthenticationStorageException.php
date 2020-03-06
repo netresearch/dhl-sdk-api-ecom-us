@@ -17,6 +17,6 @@ namespace Dhl\Sdk\EcomUs\Exception;
  * @author Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
  */
-class AuthenticationStorageException extends AuthenticationException
+class AuthenticationStorageException extends DetailedServiceException
 {
 }

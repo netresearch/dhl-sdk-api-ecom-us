@@ -10,7 +10,8 @@ namespace Dhl\Sdk\EcomUs\Service;
 
 use Dhl\Sdk\EcomUs\Api\Data\LabelInterface;
 use Dhl\Sdk\EcomUs\Api\LabelServiceInterface;
-use Dhl\Sdk\EcomUs\Exception\AuthenticationErrorException;
+use Dhl\Sdk\EcomUs\Exception\AuthenticationException;
+use Dhl\Sdk\EcomUs\Exception\AuthenticationStorageException;
 use Dhl\Sdk\EcomUs\Exception\DetailedErrorException;
 use Dhl\Sdk\EcomUs\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\EcomUs\Model\Label\CreateLabelResponseType;
@@ -105,11 +106,13 @@ class LabelService implements LabelServiceInterface
 
             /** @var CreateLabelResponseType $labelResponse */
             $labelResponse = $this->serializer->decode($responseJson, CreateLabelResponseType::class);
-        } catch (AuthenticationErrorException $exception) {
-            throw ServiceExceptionFactory::createAuthenticationException($exception);
         } catch (DetailedErrorException $exception) {
             throw ServiceExceptionFactory::createDetailedServiceException($exception);
         } catch (\Throwable $exception) {
+            if ($exception instanceof AuthenticationException || $exception instanceof AuthenticationStorageException) {
+                throw ServiceExceptionFactory::createDetailedServiceException($exception);
+            }
+
             throw ServiceExceptionFactory::create($exception);
         }
 

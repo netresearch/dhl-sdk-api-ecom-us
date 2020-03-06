@@ -30,7 +30,6 @@ interface ManifestServiceInterface
      * @param string $pickupAccountNumber
      * @return ManifestInterface[]
      *
-     * @throws AuthenticationException
      * @throws DetailedServiceException
      * @throws ServiceException
      */
@@ -45,7 +44,6 @@ interface ManifestServiceInterface
      * @param string[] $packageIds
      * @return ManifestInterface[]
      *
-     * @throws AuthenticationException
      * @throws DetailedServiceException
      * @throws ServiceException
      */

@@ -33,7 +33,6 @@ interface LabelServiceInterface
      *
      * @return LabelInterface
      *
-     * @throws AuthenticationException
      * @throws DetailedServiceException
      * @throws ServiceException
      */

@@ -10,7 +10,6 @@ namespace Dhl\Sdk\EcomUs\Service;
 
 use Dhl\Sdk\EcomUs\Api\Data\ManifestInterface;
 use Dhl\Sdk\EcomUs\Api\ManifestServiceInterface;
-use Dhl\Sdk\EcomUs\Exception\AuthenticationErrorException;
 use Dhl\Sdk\EcomUs\Exception\AuthenticationException;
 use Dhl\Sdk\EcomUs\Exception\DetailedErrorException;
 use Dhl\Sdk\EcomUs\Exception\DetailedServiceException;
@@ -130,11 +129,13 @@ class ManifestService implements ManifestServiceInterface
 
             /** @var DownloadManifestResponseType $manifestResponse */
             $downloadResponse = $this->serializer->decode($responseJson, DownloadManifestResponseType::class);
-        } catch (AuthenticationErrorException $exception) {
-            throw ServiceExceptionFactory::createAuthenticationException($exception);
         } catch (DetailedErrorException $exception) {
             throw ServiceExceptionFactory::createDetailedServiceException($exception);
         } catch (\Throwable $exception) {
+            if ($exception instanceof AuthenticationException) {
+                throw ServiceExceptionFactory::createDetailedServiceException($exception);
+            }
+
             throw ServiceExceptionFactory::create($exception);
         }
 

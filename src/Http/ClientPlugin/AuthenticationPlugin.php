@@ -10,6 +10,7 @@ namespace Dhl\Sdk\EcomUs\Http\ClientPlugin;
 
 use Dhl\Sdk\EcomUs\Api\AuthenticationStorageInterface;
 use Dhl\Sdk\EcomUs\Exception\AuthenticationException;
+use Dhl\Sdk\EcomUs\Exception\AuthenticationStorageException;
 use Dhl\Sdk\EcomUs\Service\AuthenticationService;
 use Http\Client\Common\Plugin;
 use Http\Client\Exception\TransferException;
@@ -66,6 +67,7 @@ final class AuthenticationPlugin implements Plugin
      * @return Promise Resolves a PSR-7 Response or fails with an Http\Client\Exception (The same as HttpAsyncClient).
      *
      * @throws AuthenticationException
+     * @throws AuthenticationStorageException
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
@@ -113,6 +115,7 @@ final class AuthenticationPlugin implements Plugin
      * @link http://docs.php-http.org/en/latest/plugins/build-your-own.html
      *
      * @throws AuthenticationException
+     * @throws AuthenticationStorageException
      */
     private function renewToken(): void
     {
