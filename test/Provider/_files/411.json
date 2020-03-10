@@ -1,0 +1,8 @@
+{
+  "fault": {
+    "faultstring": "Content-Length is missing",
+    "detail": {
+      "errorcode": "messaging.adaptors.http.flow.LengthRequired"
+    }
+  }
+}

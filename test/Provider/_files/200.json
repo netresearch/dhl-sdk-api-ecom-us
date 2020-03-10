@@ -1,0 +1,27 @@
+{
+  "timestamp": "2020-03-06T11:58:08.328Z",
+  "pickup": "7654321",
+  "distributionCenter": "USMCO1",
+  "orderedProductId": "GND",
+  "labels": [
+    {
+      "createdOn": "2020-03-06T11:58:08.006Z",
+      "packageId": "123456789",
+      "dhlPackageId": "987654321",
+      "trackingId": "918273645",
+      "labelData": "AAAAASUVORK5CYII=",
+      "encodeType": "BASE64",
+      "format": "PNG",
+      "link": "https://api-bat.dhlecs.com/shipping/v4/label/7654321?packageId=123456789",
+      "labelDetail": {
+        "serviceLevel": "GRD",
+        "outboundSortCode": "44",
+        "sortingSetupVersion": "2",
+        "inboundSortCode": "s08",
+        "intendedReceivingFacility": "ORD",
+        "mailBanner": "PS LIGHTWEIGHT",
+        "customsDetailsProvided": false
+      }
+    }
+  ]
+}

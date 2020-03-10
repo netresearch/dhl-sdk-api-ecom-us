@@ -1,0 +1,11 @@
+{
+  "type": "https://api-bat.dhlecs.com/docs/errors/400.0204003",
+  "title": "Static Validation Failed",
+  "invalidParams": [
+    {
+      "name": "returnAddress",
+      "path": "/",
+      "reason": "required key [returnAddress] not found"
+    }
+  ]
+}
