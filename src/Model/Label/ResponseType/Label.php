@@ -35,7 +35,7 @@ class Label
     private $dhlPackageId;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $trackingId;
 
@@ -93,7 +93,7 @@ class Label
      */
     public function getTrackingId(): string
     {
-        return $this->trackingId;
+        return (string) $this->trackingId;
     }
 
     /**
