@@ -71,12 +71,11 @@ final class AuthenticationPlugin implements Plugin
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
-        if (!$this->authStorage->readToken() || $this->authStorage->readTokenExpiry() < time()) {
-            // perform authentication with basic auth
-            $this->renewToken();
-        }
-
         $authToken = $this->authStorage->readToken();
+        if (!$authToken) {
+            // perform authentication with basic auth
+            $authToken = $this->renewToken();
+        }
 
         /** @var Bearer $authentication */
         $authentication = new Bearer($authToken);
@@ -114,10 +113,11 @@ final class AuthenticationPlugin implements Plugin
      *
      * @link http://docs.php-http.org/en/latest/plugins/build-your-own.html
      *
+     * @return string
      * @throws AuthenticationException
      * @throws AuthenticationStorageException
      */
-    private function renewToken(): void
+    private function renewToken(): string
     {
         // perform authentication with basic auth
         $authResponse = $this->authService->authenticate(
@@ -125,9 +125,8 @@ final class AuthenticationPlugin implements Plugin
             $this->authStorage->getPassword()
         );
 
-        $this->authStorage->saveToken(
-            $authResponse->getValue(),
-            time() + $authResponse->getExpiresIn()
-        );
+        $this->authStorage->saveToken($authResponse->getValue(), $authResponse->getExpiresIn());
+
+        return $authResponse->getValue();
     }
 }

@@ -38,16 +38,10 @@ interface AuthenticationStorageInterface
     public function readToken(): string;
 
     /**
-     * @return int
-     * @throws AuthenticationStorageException
-     */
-    public function readTokenExpiry(): int;
-
-    /**
      * @param string $token Bearer token
-     * @param int $expiry Expiry timestamp
+     * @param int $lifetime Expiry time in seconds
      * @return void
      * @throws AuthenticationStorageException
      */
-    public function saveToken(string $token, int $expiry);
+    public function saveToken(string $token, int $lifetime);
 }

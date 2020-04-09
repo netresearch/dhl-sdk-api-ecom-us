@@ -38,7 +38,7 @@ class AuthenticationStorage implements AuthenticationStorageInterface
     private $token = '';
 
     /**
-     * @var int
+     * @var int Expiry unix timestamp (e.g. now + 3600)
      */
     private $expiry = 0;
 
@@ -66,17 +66,17 @@ class AuthenticationStorage implements AuthenticationStorageInterface
 
     public function readToken(): string
     {
+        if ($this->expiry < time()) {
+            // token expired
+            return '';
+        }
+
         return $this->token;
     }
 
-    public function readTokenExpiry(): int
+    public function saveToken(string $token, int $lifetime)
     {
-        return $this->expiry;
-    }
-
-    public function saveToken(string $token, int $expiry)
-    {
+        $this->expiry = time() + $lifetime;
         $this->token = $token;
-        $this->expiry = $expiry;
     }
 }
