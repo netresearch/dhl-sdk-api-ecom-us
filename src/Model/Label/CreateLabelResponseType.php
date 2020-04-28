@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Model\Label;
 
-use Dhl\Sdk\EcomUs\Model\Label\ResponseType\Label;
-
 /**
  * Class CreateLabelResponseType
  *

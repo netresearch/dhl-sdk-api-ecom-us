@@ -91,7 +91,6 @@ final class ErrorPlugin implements Plugin
     /**
      * Handles all client/server errors when response does not contains body with error message.
      *
-     * @param int $statusCode
      * @param RequestInterface $request
      * @param ResponseInterface $response
      *
@@ -99,7 +98,7 @@ final class ErrorPlugin implements Plugin
      *
      * @throws HttpException
      */
-    private function handleError(int $statusCode, RequestInterface $request, ResponseInterface $response)
+    private function handleError(RequestInterface $request, ResponseInterface $response)
     {
         throw new HttpException($response->getReasonPhrase(), $request, $response);
     }
@@ -125,7 +124,7 @@ final class ErrorPlugin implements Plugin
             if ($statusCode >= 400 && $statusCode < 600) {
                 $this->isDetailedErrorResponse($response)
                     ? $this->handleDetailedError($statusCode, $request, $response)
-                    : $this->handleError($statusCode, $request, $response);
+                    : $this->handleError($request, $response);
             }
 
             // no error

@@ -77,7 +77,6 @@ final class AuthenticationPlugin implements Plugin
             $authToken = $this->renewToken();
         }
 
-        /** @var Bearer $authentication */
         $authentication = new Bearer($authToken);
         /** @var RequestInterface $request */
         $request = $authentication->authenticate($request);

@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Dhl\Sdk\EcomUs\Api;
 
 use Dhl\Sdk\EcomUs\Api\Data\ManifestInterface;
-use Dhl\Sdk\EcomUs\Exception\AuthenticationException;
 use Dhl\Sdk\EcomUs\Exception\DetailedServiceException;
 use Dhl\Sdk\EcomUs\Exception\ServiceException;
 

@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Dhl\Sdk\EcomUs\Api;
 
 use Dhl\Sdk\EcomUs\Exception\RequestValidatorException;
-use Dhl\Sdk\EcomUs\Model\Label\CreateLabelRequestType;
 
 /**
  * Interface LabelRequestBuilderInterface
