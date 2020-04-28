@@ -31,7 +31,7 @@ class Label implements LabelInterface
     /**
      * @var string
      */
-    private $trackingNumber;
+    private $trackingId;
 
     /**
      * @var string
@@ -47,20 +47,20 @@ class Label implements LabelInterface
      * Label constructor.
      * @param string $packageId
      * @param string $dhlPackageId
-     * @param string $trackingNumber
+     * @param string $trackingId
      * @param string $format
      * @param string $labelData
      */
     public function __construct(
         string $packageId,
         string $dhlPackageId,
-        string $trackingNumber,
+        string $trackingId,
         string $format,
         string $labelData
     ) {
         $this->packageId = $packageId;
         $this->dhlPackageId = $dhlPackageId;
-        $this->trackingNumber = $trackingNumber;
+        $this->trackingId = $trackingId;
         $this->format = $format;
         $this->labelData = $labelData;
     }
@@ -84,9 +84,9 @@ class Label implements LabelInterface
     /**
      * @return string
      */
-    public function getTrackingNumber(): string
+    public function getTrackingId(): string
     {
-        return $this->trackingNumber;
+        return $this->trackingId;
     }
 
     /**

@@ -36,7 +36,7 @@ interface LabelInterface
      *
      * @return string
      */
-    public function getTrackingNumber(): string;
+    public function getTrackingId(): string;
 
     /**
      * Returns the format of returned label.

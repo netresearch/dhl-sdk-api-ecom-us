@@ -62,7 +62,7 @@ class LabelServiceTestExpectation
         $responseData = json_decode($responseJson, true);
         Assert::assertSame($responseData['labels'][0]['packageId'], $label->getPackageId());
         Assert::assertSame($responseData['labels'][0]['dhlPackageId'], $label->getDhlPackageId());
-        Assert::assertSame($responseData['labels'][0]['trackingId'], $label->getTrackingNumber());
+        Assert::assertSame($responseData['labels'][0]['trackingId'], $label->getTrackingId());
         Assert::assertSame($responseData['labels'][0]['format'], $label->getFormat());
     }
 
