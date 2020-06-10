@@ -24,27 +24,47 @@ use Dhl\Sdk\EcomUs\Exception\ServiceException;
 interface ManifestServiceInterface
 {
     /**
-     * Create manifest(s) for all pending packages.
+     * Create manifest for all pending packages.
      *
      * @param string $pickupAccountNumber
-     * @return ManifestInterface[]
+     * @return ManifestInterface
      *
      * @throws DetailedServiceException
      * @throws ServiceException
      */
-    public function createManifests(string $pickupAccountNumber): array;
+    public function createManifest(string $pickupAccountNumber): ManifestInterface;
 
     /**
-     * Create manifest(s) by submitting a list of DHL package IDs (DHL GM Numbers / Mail Identifiers).
+     * Create manifest by submitting a list of package IDs.
      *
-     * This will prevent manifesting all pending packages accidentally. To manifest everything, {@see createManifests}.
+     * Pass in either Customer Confirmation Numbers or DHL GM Numbers.
+     *
+     * This method will prevent manifesting all pending packages accidentally.
+     * To manifest everything, {@see createManifest}.
      *
      * @param string $pickupAccountNumber
      * @param string[] $packageIds
-     * @return ManifestInterface[]
+     * @param string[] $dhlPackageIds
+     * @return ManifestInterface
      *
      * @throws DetailedServiceException
      * @throws ServiceException
      */
-    public function creatPackageManifests(string $pickupAccountNumber, array $packageIds): array;
+    public function createPackageManifest(
+        string $pickupAccountNumber,
+        array $packageIds = [],
+        array $dhlPackageIds = []
+    ): ManifestInterface;
+
+    /**
+     * Download a previously created manifest, identified by request ID.
+     *
+     * @param string $pickupAccountNumber Pickup Account Number
+     * @param string $requestId Manifest ID
+     * @return ManifestInterface
+     *
+     * @throws DetailedServiceException
+     * @throws ServiceException
+     */
+    public function getManifest(string $pickupAccountNumber, string $requestId): ManifestInterface;
 }

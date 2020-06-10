@@ -8,11 +8,12 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Service\ManifestService;
 
-use Dhl\Sdk\EcomUs\Api\Data\ManifestErrorInterface;
+use Dhl\Sdk\EcomUs\Api\Data\Manifest\DocumentInterface;
+use Dhl\Sdk\EcomUs\Api\Data\Manifest\ErrorInterface;
 use Dhl\Sdk\EcomUs\Api\Data\ManifestInterface;
 
 /**
- * Manifest service response model.
+ * Manifest response model.
  *
  * @author Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
@@ -22,50 +23,71 @@ class Manifest implements ManifestInterface
     /**
      * @var string
      */
-    private $manifestId;
+    private $requestId;
 
     /**
      * @var string
      */
-    private $data;
+    private $timestamp;
 
     /**
-     * @var ManifestErrorInterface[]
+     * @var string
+     */
+    private $status;
+
+    /**
+     * @var DocumentInterface[]
+     */
+    private $documents;
+
+    /**
+     * @var ErrorInterface[]
      */
     private $errors;
 
     /**
      * Manifest constructor.
-     * @param string $manifestId
-     * @param string $data
-     * @param ManifestErrorInterface[] $errors
+     *
+     * @param string $requestId
+     * @param string $timestamp
+     * @param string $status
+     * @param DocumentInterface[] $documents
+     * @param ErrorInterface[] $errors
      */
-    public function __construct(string $manifestId, string $data, array $errors)
-    {
-        $this->manifestId = $manifestId;
-        $this->data = $data;
+    public function __construct(
+        string $requestId,
+        string $timestamp,
+        string $status,
+        array $documents,
+        array $errors
+    ) {
+        $this->requestId = $requestId;
+        $this->timestamp = $timestamp;
+        $this->status = $status;
+        $this->documents = $documents;
         $this->errors = $errors;
     }
 
-    /**
-     * @return string
-     */
-    public function getManifestId(): string
+    public function getRequestId(): string
     {
-        return $this->manifestId;
+        return $this->requestId;
     }
 
-    /**
-     * @return string
-     */
-    public function getData(): string
+    public function getTimestamp(): string
     {
-        return $this->data;
+        return $this->timestamp;
     }
 
-    /**
-     * @return ManifestErrorInterface[]
-     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function getDocuments(): array
+    {
+        return $this->documents;
+    }
+
     public function getErrors(): array
     {
         return $this->errors;

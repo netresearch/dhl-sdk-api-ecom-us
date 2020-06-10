@@ -60,11 +60,6 @@ class Manifest
     private $format;
 
     /**
-     * @var \Dhl\Sdk\EcomUs\Model\Manifest\ResponseType\ManifestSummary
-     */
-    private $manifestSummary;
-
-    /**
      * @return string
      */
     public function getCreatedOn(): string
@@ -126,13 +121,5 @@ class Manifest
     public function getFormat(): string
     {
         return $this->format;
-    }
-
-    /**
-     * @return \Dhl\Sdk\EcomUs\Model\Manifest\ResponseType\ManifestSummary
-     */
-    public function getManifestSummary(): ManifestSummary
-    {
-        return $this->manifestSummary;
     }
 }

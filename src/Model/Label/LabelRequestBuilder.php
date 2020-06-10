@@ -307,7 +307,10 @@ class LabelRequestBuilder implements LabelRequestBuilderInterface
         $consigneeAddress->setIdNumber($this->data['recipient']['idNumber'] ?? '');
         $consigneeAddress->setIdType($this->data['recipient']['idType'] ?? '');
 
-        $weight = new Weight($this->data['packageDetails']['weight'], $this->data['packageDetails']['weightUom']);
+        $weight = new Weight(
+            round($this->data['packageDetails']['weight'], 2),
+            $this->data['packageDetails']['weightUom']
+        );
         $packageDetail = new PackageDetail($this->data['packageDetails']['packageId'], $weight);
         $packageDetail->setPackageDescription($this->data['packageDetails']['packageDescription'] ?? '');
         $packageDetail->setPackageReference($this->data['packageDetails']['packageReference'] ?? '');

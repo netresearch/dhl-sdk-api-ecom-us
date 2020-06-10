@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Model\Manifest;
 
+use Dhl\Sdk\EcomUs\Model\Manifest\ResponseType\ManifestSummary;
+
 /**
  * Class CreateManifestResponseType
  *
@@ -48,6 +50,11 @@ class DownloadManifestResponseType
      * @var \Dhl\Sdk\EcomUs\Model\Manifest\ResponseType\Manifest[]
      */
     private $manifests;
+
+    /**
+     * @var \Dhl\Sdk\EcomUs\Model\Manifest\ResponseType\ManifestSummary
+     */
+    private $manifestSummary;
 
     /**
      * @return string
@@ -94,6 +101,14 @@ class DownloadManifestResponseType
      */
     public function getManifests(): array
     {
-        return $this->manifests;
+        return $this->manifests ?? [];
+    }
+
+    /**
+     * @return \Dhl\Sdk\EcomUs\Model\Manifest\ResponseType\ManifestSummary
+     */
+    public function getManifestSummary(): ManifestSummary
+    {
+        return $this->manifestSummary;
     }
 }

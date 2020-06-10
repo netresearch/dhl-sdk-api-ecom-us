@@ -56,9 +56,9 @@ class JsonSerializer
      */
     private function filterRecursive($element): array
     {
-        // Filter null and empty strings
+        // Filter null, empty strings, empty arrays
         $filterFunction = function ($entry): bool {
-            return ($entry !== null) && ($entry !== '');
+            return ($entry !== null) && ($entry !== '') && (!is_array($entry) || count($entry) > 0);
         };
 
         foreach ($element as &$value) {

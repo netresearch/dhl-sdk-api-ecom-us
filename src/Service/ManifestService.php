@@ -11,6 +11,7 @@ namespace Dhl\Sdk\EcomUs\Service;
 use Dhl\Sdk\EcomUs\Api\Data\ManifestInterface;
 use Dhl\Sdk\EcomUs\Api\ManifestServiceInterface;
 use Dhl\Sdk\EcomUs\Exception\AuthenticationException;
+use Dhl\Sdk\EcomUs\Exception\AuthenticationStorageException;
 use Dhl\Sdk\EcomUs\Exception\DetailedErrorException;
 use Dhl\Sdk\EcomUs\Exception\DetailedServiceException;
 use Dhl\Sdk\EcomUs\Exception\ServiceException;
@@ -27,7 +28,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 /**
  * ManifestService
  *
- * Entrypoint for DHL eCommerce US label operations.
+ * Entrypoint for DHL eCommerce US manifestation operations.
  *
  * @author Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
@@ -97,17 +98,20 @@ class ManifestService implements ManifestServiceInterface
      *
      * @param string $pickupAccountNumber
      * @param string[] $packageIds
+     * @param string[] $dhlPackageIds
      *
-     * @return ManifestInterface[]
+     * @return ManifestInterface
      *
-     * @throws AuthenticationException
      * @throws DetailedServiceException
      * @throws ServiceException
      */
-    private function manifest(string $pickupAccountNumber, array $packageIds = []): array
-    {
+    private function manifest(
+        string $pickupAccountNumber,
+        array $packageIds = [],
+        array $dhlPackageIds = []
+    ): ManifestInterface {
         $uri = $this->baseUrl . self::RESOURCE;
-        $manifestRequest = new CreateManifestRequestType($pickupAccountNumber, $packageIds);
+        $manifestRequest = new CreateManifestRequestType($pickupAccountNumber, $packageIds, $dhlPackageIds);
 
         try {
             // create manifests
@@ -127,12 +131,12 @@ class ManifestService implements ManifestServiceInterface
             $response = $this->client->sendRequest($httpRequest);
             $responseJson = (string) $response->getBody();
 
-            /** @var DownloadManifestResponseType $manifestResponse */
+            /** @var DownloadManifestResponseType $downloadResponse */
             $downloadResponse = $this->serializer->decode($responseJson, DownloadManifestResponseType::class);
         } catch (DetailedErrorException $exception) {
             throw ServiceExceptionFactory::createDetailedServiceException($exception);
         } catch (\Throwable $exception) {
-            if ($exception instanceof AuthenticationException) {
+            if ($exception instanceof AuthenticationException || $exception instanceof AuthenticationStorageException) {
                 throw ServiceExceptionFactory::createDetailedServiceException($exception);
             }
 
@@ -142,18 +146,45 @@ class ManifestService implements ManifestServiceInterface
         return $this->responseMapper->map($downloadResponse);
     }
 
-    public function createManifests(string $pickupAccountNumber): array
+    public function createManifest(string $pickupAccountNumber): ManifestInterface
     {
         return $this->manifest($pickupAccountNumber, []);
     }
 
-    public function creatPackageManifests(string $pickupAccountNumber, array $packageIds): array
-    {
-        if (empty($packageIds)) {
-            // prevent manifesting all pending labels, do not send request
-            return [];
+    public function createPackageManifest(
+        string $pickupAccountNumber,
+        array $packageIds = [],
+        array $dhlPackageIds = []
+    ): ManifestInterface {
+        if (empty($packageIds) && empty($dhlPackageIds)) {
+            // prevent manifesting all pending packages, do not send request
+            throw new DetailedServiceException('No packages given to manifest.');
         }
 
-        return $this->manifest($pickupAccountNumber, $packageIds);
+        return $this->manifest($pickupAccountNumber, $packageIds, $dhlPackageIds);
+    }
+
+    public function getManifest(string $pickupAccountNumber, string $requestId): ManifestInterface
+    {
+        $uri = sprintf('%s%s/%s/%s', $this->baseUrl, self::RESOURCE, $pickupAccountNumber, $requestId);
+
+        try {
+            $httpRequest = $this->requestFactory->createRequest('GET', $uri);
+            $response = $this->client->sendRequest($httpRequest);
+            $responseJson = (string) $response->getBody();
+
+            /** @var DownloadManifestResponseType $downloadResponse */
+            $downloadResponse = $this->serializer->decode($responseJson, DownloadManifestResponseType::class);
+        } catch (DetailedErrorException $exception) {
+            throw ServiceExceptionFactory::createDetailedServiceException($exception);
+        } catch (\Throwable $exception) {
+            if ($exception instanceof AuthenticationException || $exception instanceof AuthenticationStorageException) {
+                throw ServiceExceptionFactory::createDetailedServiceException($exception);
+            }
+
+            throw ServiceExceptionFactory::create($exception);
+        }
+
+        return $this->responseMapper->map($downloadResponse);
     }
 }

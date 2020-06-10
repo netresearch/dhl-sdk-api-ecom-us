@@ -30,15 +30,22 @@ class CreateManifestRequestType implements \JsonSerializable
     private $packageIds;
 
     /**
+     * @var string[]
+     */
+    private $dhlPackageIds;
+
+    /**
      * CreateManifestRequestType constructor.
      *
      * @param string $pickup
      * @param string[] $packageIds
+     * @param string[] $dhlPackageIds
      */
-    public function __construct(string $pickup, array $packageIds = [])
+    public function __construct(string $pickup, array $packageIds = [], array $dhlPackageIds = [])
     {
         $this->pickup = $pickup;
         $this->packageIds = $packageIds;
+        $this->dhlPackageIds = $dhlPackageIds;
     }
 
     /**
@@ -50,7 +57,10 @@ class CreateManifestRequestType implements \JsonSerializable
         return  [
             'pickup' => $this->pickup,
             'manifests' => [
-                ['packageIds' => $this->packageIds],
+                [
+                    'packageIds' => $this->packageIds,
+                    'dhlPackageIds' => $this->dhlPackageIds,
+                ],
             ]
         ];
     }

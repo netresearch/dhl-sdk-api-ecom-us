@@ -8,15 +8,15 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Service\ManifestService;
 
-use Dhl\Sdk\EcomUs\Api\Data\ManifestErrorInterface;
+use Dhl\Sdk\EcomUs\Api\Data\Manifest\ErrorInterface;
 
 /**
- * Manifest service response model.
+ * Manifest error response model.
  *
  * @author Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link   https://www.netresearch.de/
  */
-class ManifestError implements ManifestErrorInterface
+class ManifestError implements ErrorInterface
 {
     /**
      * @var string
@@ -35,6 +35,7 @@ class ManifestError implements ManifestErrorInterface
 
     /**
      * ManifestError constructor.
+     *
      * @param string $packageId
      * @param string $code
      * @param string $description
