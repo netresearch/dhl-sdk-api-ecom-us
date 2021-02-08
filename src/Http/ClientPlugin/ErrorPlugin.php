@@ -60,7 +60,11 @@ final class ErrorPlugin implements Plugin
 
         $issues = array_map(
             function (array $issue) {
-                return sprintf('%s (%s): %s.', $issue['name'], $issue['path'], $issue['reason']);
+                if (isset($issue['name'], $issue['path'], $issue['reason'])) {
+                    return sprintf('%s (%s): %s.', $issue['name'], $issue['path'], $issue['reason']);
+                } else {
+                    return implode(' ', $issue);
+                }
             },
             $responseData['invalidParams']
         );

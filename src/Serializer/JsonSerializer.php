@@ -54,7 +54,7 @@ class JsonSerializer
      * @param mixed[] $element
      * @return mixed[]
      */
-    private function filterRecursive($element): array
+    private function filterRecursive(array $element): array
     {
         // Filter null, empty strings, empty arrays
         $filterFunction = function ($entry): bool {

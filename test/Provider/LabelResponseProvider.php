@@ -26,6 +26,11 @@ class LabelResponseProvider
         return \file_get_contents(__DIR__ . '/_files/400_validation_failed.json');
     }
 
+    public static function downstreamValidationFailed(): string
+    {
+        return \file_get_contents(__DIR__ . '/_files/400_downstream_validation_failed.json');
+    }
+
     public static function unauthorized(): string
     {
         return \file_get_contents(__DIR__ . '/_files/401_invalid_token.json');

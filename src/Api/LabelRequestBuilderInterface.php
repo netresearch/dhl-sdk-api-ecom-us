@@ -203,7 +203,7 @@ interface LabelRequestBuilderInterface
      * Set package id (required) and prefix (optional).
      *
      * @param string $packageId Customer Confirmation Number (CCN).
-     * @param string $packageReference Prefix to the human readable Package ID.
+     * @param string|null $packageReference Prefix to the human readable Package ID.
      *
      * @return LabelRequestBuilderInterface
      */
@@ -307,7 +307,7 @@ interface LabelRequestBuilderInterface
     /**
      * Set the shipment's two-digit content category code (optional).
      *
-     * @param string $dgCategory
+     * @param string|null $dgCategory
      *
      * @return LabelRequestBuilderInterface
      */

@@ -1,0 +1,9 @@
+{
+  "type": "https://api-sandbox.dhlecs.com/docs/errors/400.0204009",
+  "title": "Downstream Validation Failed",
+  "invalidParams": [
+    {
+      "reason": "unprocessed"
+    }
+  ]
+}

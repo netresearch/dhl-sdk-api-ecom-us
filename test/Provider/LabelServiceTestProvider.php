@@ -40,6 +40,7 @@ class LabelServiceTestProvider
 
         return [
             '400_bad_request' => [$invalidRequest, 400, LabelResponseProvider::validationFailed()],
+            '400_downstream_error' => [$validRequest, 400, LabelResponseProvider::downstreamValidationFailed()],
             '500_gateway_error' => [$validRequest, 500, LabelResponseProvider::serverError()],
             '500_service_error' => [$validRequest, 500, LabelResponseProvider::serviceError()],
         ];
