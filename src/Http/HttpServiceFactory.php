@@ -36,9 +36,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Create a service instance for REST web service communication.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class HttpServiceFactory implements ServiceFactoryInterface
 {

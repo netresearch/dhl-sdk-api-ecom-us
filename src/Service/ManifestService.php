@@ -29,9 +29,6 @@ use Psr\Http\Message\StreamFactoryInterface;
  * ManifestService
  *
  * Entrypoint for DHL eCommerce US manifestation operations.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class ManifestService implements ManifestServiceInterface
 {

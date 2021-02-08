@@ -8,12 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Api\Data\Manifest;
 
-/**
- * Manifestation package error.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 interface ErrorInterface
 {
     /**

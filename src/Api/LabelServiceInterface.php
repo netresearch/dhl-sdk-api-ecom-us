@@ -13,13 +13,7 @@ use Dhl\Sdk\EcomUs\Exception\DetailedServiceException;
 use Dhl\Sdk\EcomUs\Exception\ServiceException;
 
 /**
- * Interface LabelServiceInterface
- *
- * Entrypoint for DHL eCommerce US label operations.
- *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface LabelServiceInterface
 {

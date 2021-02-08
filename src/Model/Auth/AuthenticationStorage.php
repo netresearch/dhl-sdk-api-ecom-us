@@ -16,9 +16,6 @@ use Dhl\Sdk\EcomUs\Api\AuthenticationStorageInterface;
  * Default authentication storage implementation. Token will be discarded when
  * storage object gets destroyed. To persist and re-use the token, implement a
  * custom storage (e.g. session storage, database storage).
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class AuthenticationStorage implements AuthenticationStorageInterface
 {

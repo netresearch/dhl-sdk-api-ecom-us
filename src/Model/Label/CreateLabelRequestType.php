@@ -13,12 +13,6 @@ use Dhl\Sdk\EcomUs\Model\Label\RequestType\CustomsDetails;
 use Dhl\Sdk\EcomUs\Model\Label\RequestType\PackageDetail;
 use Dhl\Sdk\EcomUs\Model\Label\RequestType\ShipperAddress;
 
-/**
- * Class CreateLabelRequestType
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class CreateLabelRequestType implements \JsonSerializable
 {
     /**

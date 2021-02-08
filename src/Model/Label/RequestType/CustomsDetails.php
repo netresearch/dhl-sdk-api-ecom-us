@@ -8,12 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Model\Label\RequestType;
 
-/**
- * Class CustomsDetails
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class CustomsDetails implements \JsonSerializable
 {
     /**

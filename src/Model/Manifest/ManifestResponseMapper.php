@@ -15,12 +15,6 @@ use Dhl\Sdk\EcomUs\Service\ManifestService\Manifest;
 use Dhl\Sdk\EcomUs\Service\ManifestService\ManifestDocument;
 use Dhl\Sdk\EcomUs\Service\ManifestService\ManifestError;
 
-/**
- * Class ManifestResponseMapper
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ManifestResponseMapper
 {
     /**

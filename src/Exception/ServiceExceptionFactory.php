@@ -14,9 +14,6 @@ use Http\Client\Exception as HttpClientException;
  * Class ServiceExceptionFactory
  *
  * A service exception factory to create specific exception instances.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class ServiceExceptionFactory
 {

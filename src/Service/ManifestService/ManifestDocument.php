@@ -10,12 +10,6 @@ namespace Dhl\Sdk\EcomUs\Service\ManifestService;
 
 use Dhl\Sdk\EcomUs\Api\Data\Manifest\DocumentInterface;
 
-/**
- * Manifest document response model.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ManifestDocument implements DocumentInterface
 {
     /**

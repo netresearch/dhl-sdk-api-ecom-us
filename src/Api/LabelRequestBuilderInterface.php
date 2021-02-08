@@ -11,11 +11,6 @@ namespace Dhl\Sdk\EcomUs\Api;
 use Dhl\Sdk\EcomUs\Exception\RequestValidatorException;
 
 /**
- * Interface LabelRequestBuilderInterface
- *
- * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface LabelRequestBuilderInterface
 {

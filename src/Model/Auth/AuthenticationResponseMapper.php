@@ -10,12 +10,6 @@ namespace Dhl\Sdk\EcomUs\Model\Auth;
 
 use Dhl\Sdk\EcomUs\Service\AuthenticationService\Token;
 
-/**
- * Class AuthenticationResponseMapper
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class AuthenticationResponseMapper
 {
     /**

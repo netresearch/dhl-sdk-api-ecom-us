@@ -11,9 +11,6 @@ namespace Dhl\Sdk\EcomUs\Model\Label\ResponseType;
 /**
  * Class LabelDetail
  *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- *
  * !!! Do not change the annotation statements as this class is passed through the JsonMapper
  *     which requires the full namespace annotation in order to map the JSON response correctly.
  */

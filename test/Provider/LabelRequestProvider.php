@@ -11,12 +11,6 @@ namespace Dhl\Sdk\EcomUs\Test\Provider;
 use Dhl\Sdk\EcomUs\Exception\RequestValidatorException;
 use Dhl\Sdk\EcomUs\Model\Label\LabelRequestBuilder;
 
-/**
- * Class LabelRequestProvider
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de
- */
 class LabelRequestProvider
 {
     /**

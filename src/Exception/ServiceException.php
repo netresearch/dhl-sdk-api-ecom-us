@@ -16,8 +16,6 @@ namespace Dhl\Sdk\EcomUs\Exception;
  * are suitable for logging.
  *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class ServiceException extends \Exception
 {

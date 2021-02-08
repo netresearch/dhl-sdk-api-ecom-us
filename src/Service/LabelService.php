@@ -25,9 +25,6 @@ use Psr\Http\Message\StreamFactoryInterface;
  * LabelService
  *
  * Entrypoint for DHL eCommerce US label operations.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class LabelService implements LabelServiceInterface
 {

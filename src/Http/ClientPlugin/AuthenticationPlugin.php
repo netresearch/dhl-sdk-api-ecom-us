@@ -22,9 +22,6 @@ use Psr\Http\Message\RequestInterface;
  * Class AuthenticationPlugin
  *
  * On authentication errors, renew token and try again.
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 final class AuthenticationPlugin implements Plugin
 {

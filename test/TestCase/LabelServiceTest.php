@@ -22,12 +22,6 @@ use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 
-/**
- * Class LabelServiceTest
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de
- */
 class LabelServiceTest extends TestCase
 {
     /**

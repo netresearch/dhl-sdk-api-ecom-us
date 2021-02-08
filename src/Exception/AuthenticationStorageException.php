@@ -14,8 +14,6 @@ namespace Dhl\Sdk\EcomUs\Exception;
  * Exception thrown when an API access token could not be persisted.
  *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class AuthenticationStorageException extends DetailedServiceException
 {

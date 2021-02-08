@@ -12,12 +12,6 @@ use Dhl\Sdk\EcomUs\Api\Data\Manifest\DocumentInterface;
 use Dhl\Sdk\EcomUs\Api\Data\Manifest\ErrorInterface;
 use Dhl\Sdk\EcomUs\Api\Data\ManifestInterface;
 
-/**
- * Manifest response model.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class Manifest implements ManifestInterface
 {
     /**

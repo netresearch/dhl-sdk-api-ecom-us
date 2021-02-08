@@ -12,11 +12,7 @@ use Dhl\Sdk\EcomUs\Api\Data\Manifest\DocumentInterface;
 use Dhl\Sdk\EcomUs\Api\Data\Manifest\ErrorInterface;
 
 /**
- * Interface ManifestInterface
- *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface ManifestInterface
 {

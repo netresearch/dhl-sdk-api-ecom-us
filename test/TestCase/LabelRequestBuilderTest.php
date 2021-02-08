@@ -11,12 +11,6 @@ namespace Dhl\Sdk\EcomUs\Model\Label;
 use Dhl\Sdk\EcomUs\Exception\RequestValidatorException;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class LabelRequestBuilderTest
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de
- */
 class LabelRequestBuilderTest extends TestCase
 {
     /**

@@ -10,12 +10,6 @@ namespace Dhl\Sdk\EcomUs\Model\Label;
 
 use Dhl\Sdk\EcomUs\Exception\RequestValidatorException;
 
-/**
- * Class LabelRequestValidator
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class LabelRequestValidator
 {
     public const MSG_ACCOUNT_DATA_REQUIRED = 'Pickup account number and primary distribution center are required.';

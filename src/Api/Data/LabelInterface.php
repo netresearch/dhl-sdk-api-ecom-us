@@ -9,11 +9,7 @@ declare(strict_types=1);
 namespace Dhl\Sdk\EcomUs\Api\Data;
 
 /**
- * Interface LabelInterface
- *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface LabelInterface
 {

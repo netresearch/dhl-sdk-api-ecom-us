@@ -12,9 +12,6 @@ namespace Dhl\Sdk\EcomUs\Serializer;
  * JsonSerializer
  *
  * Serializer for outgoing request types and incoming responses.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class JsonSerializer
 {

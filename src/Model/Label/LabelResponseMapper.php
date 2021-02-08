@@ -11,12 +11,6 @@ namespace Dhl\Sdk\EcomUs\Model\Label;
 use Dhl\Sdk\EcomUs\Api\Data\LabelInterface;
 use Dhl\Sdk\EcomUs\Service\LabelService\Label;
 
-/**
- * Class LabelResponseMapper
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class LabelResponseMapper
 {
     /**

@@ -10,12 +10,6 @@ namespace Dhl\Sdk\EcomUs\Service\LabelService;
 
 use Dhl\Sdk\EcomUs\Api\Data\LabelInterface;
 
-/**
- * Label service response model.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class Label implements LabelInterface
 {
     /**

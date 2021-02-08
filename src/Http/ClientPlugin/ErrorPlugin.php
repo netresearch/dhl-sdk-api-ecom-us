@@ -17,9 +17,6 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Convert errors into exceptions, parse exception message from response if available.
- *
- * @author Paul Siedler <paul.siedler@netresearch.de>
- * @link https://www.netresearch.de/
  */
 final class ErrorPlugin implements Plugin
 {

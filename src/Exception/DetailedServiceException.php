@@ -15,8 +15,6 @@ namespace Dhl\Sdk\EcomUs\Exception;
  * provide a meaningful error message, suitable for UI display.
  *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class DetailedServiceException extends ServiceException
 {

@@ -8,12 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\EcomUs\Test\Provider;
 
-/**
- * Class LabelResponseProvider
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de
- */
 class LabelResponseProvider
 {
     public static function success(): string

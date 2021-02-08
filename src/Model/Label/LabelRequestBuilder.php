@@ -17,12 +17,6 @@ use Dhl\Sdk\EcomUs\Model\Label\RequestType\ShipperAddress;
 use Dhl\Sdk\EcomUs\Model\Label\RequestType\ShippingCost;
 use Dhl\Sdk\EcomUs\Model\Label\RequestType\Weight;
 
-/**
- * Class LabelRequestBuilder
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class LabelRequestBuilder implements LabelRequestBuilderInterface
 {
     /**

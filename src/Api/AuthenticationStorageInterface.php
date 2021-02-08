@@ -11,13 +11,7 @@ namespace Dhl\Sdk\EcomUs\Api;
 use Dhl\Sdk\EcomUs\Exception\AuthenticationStorageException;
 
 /**
- * Interface AuthenticationStorageInterface
- *
- * Credentials Storage.
- *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface AuthenticationStorageInterface
 {

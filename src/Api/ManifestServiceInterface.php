@@ -13,13 +13,7 @@ use Dhl\Sdk\EcomUs\Exception\DetailedServiceException;
 use Dhl\Sdk\EcomUs\Exception\ServiceException;
 
 /**
- * Interface ManifestationServiceInterface
- *
- * Entrypoint for DHL eCommerce US manifest operations.
- *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface ManifestServiceInterface
 {

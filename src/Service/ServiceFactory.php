@@ -18,12 +18,6 @@ use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\HttpClientDiscovery;
 use Psr\Log\LoggerInterface;
 
-/**
- * Create a service instance.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ServiceFactory implements ServiceFactoryInterface
 {
     /**

@@ -22,9 +22,6 @@ use Psr\Http\Message\StreamFactoryInterface;
  * Class AuthenticationService
  *
  * Entrypoint for DHL eCommerce API authentication.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 class AuthenticationService
 {

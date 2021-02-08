@@ -14,12 +14,6 @@ use PHPUnit\Framework\Assert;
 use Psr\Http\Message\RequestInterface;
 use Psr\Log\Test\TestLogger;
 
-/**
- * Class LabelServiceExpectation
- *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de
- */
 class LabelServiceTestExpectation
 {
     /**
