@@ -45,11 +45,5 @@
         "psr-4": {
             "Dhl\\Sdk\\EcomUs\\Test\\": "test/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-develop": "1.0.x-dev",
-            "dev-DHLGW-916": "1.1.x-dev"
-        }
     }
 }
