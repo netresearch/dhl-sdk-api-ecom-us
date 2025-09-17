@@ -34,7 +34,7 @@
         "phpunit/phpunit": "^7.0.0",
         "php-http/mock-client": "dev-upgrade-version-2",
         "phpstan/phpstan": "^0.12.2",
-        "squizlabs/php_codesniffer": "^3.4"
+        "squizlabs/php_codesniffer": "^4.0"
     },
     "autoload": {
         "psr-4": {
